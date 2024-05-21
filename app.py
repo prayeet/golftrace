@@ -67,8 +67,19 @@ def process_video(filepath):
 @app.route('/processed/<filename>')
 def get_processed_file(filename):
     return send_from_directory(app.config['PROCESSED_FOLDER'], filename)
+# Temporary route for manual processing
+@app.route('/process_manual', methods=['GET'])
+def process_manual():
+    filename = 'example_video.mp4'  # replace with your video file name
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    if os.path.exists(filepath):
+        processed_filepath = process_video(filepath)
+        return jsonify({"processed_file": processed_filepath}), 200
+    else:
+        return jsonify({"error": "File not found"}), 404
 
 if __name__ == '__main__':
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
     os.makedirs(app.config['PROCESSED_FOLDER'], exist_ok=True)
     app.run(debug=True, host='0.0.0.0')
+    
