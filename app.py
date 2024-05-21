@@ -70,7 +70,7 @@ def get_processed_file(filename):
 # Temporary route for manual processing
 @app.route('/process_manual', methods=['GET'])
 def process_manual():
-    filename = 'example_video.mp4'  # replace with your video file name
+    filename = 'example_video.mov'  # replace with your video file name
     filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     if os.path.exists(filepath):
         processed_filepath = process_video(filepath)
