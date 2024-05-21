@@ -35,7 +35,7 @@ def process_video(filepath):
     processed_filename = f"processed_{filename}"
     processed_filepath = os.path.join(app.config['PROCESSED_FOLDER'], processed_filename)
 
-    fourcc = cv2.VideoWriter_fourcc(*'mp4')
+    fourcc = cv2.VideoWriter_fourcc(*'mov')
     out = cv2.VideoWriter(processed_filepath, fourcc, 20.0, (int(cap.get(3)), int(cap.get(4))))
 
     while cap.isOpened():
